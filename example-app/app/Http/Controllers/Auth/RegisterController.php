@@ -23,7 +23,7 @@ class RegisterController extends Controller
     // Xử lý logic đăng ký
     public function register(Request $request)
     {
-        // Validate the request
+    // Validate the request
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -34,7 +34,7 @@ class RegisterController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make($request->password), // Băm mật khẩu trước khi lưu vào cơ sở dữ liệu
         ]);
 
         // Log the user in
