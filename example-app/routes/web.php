@@ -26,6 +26,10 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 // routes/web.php
 
 Route::get('/admin/users', 'UserController@index');
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
+
 
 
 // Route đăng nhập
