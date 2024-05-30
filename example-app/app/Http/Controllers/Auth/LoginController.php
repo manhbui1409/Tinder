@@ -9,16 +9,39 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+    public function showLoginForm()
+    {
+        return view('login'); // Hiển thị form đăng nhập
+    }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            // Kiểm tra nếu email là admin@example.com
+            if (Auth::user()->email == 'admin@example.com') {
+                return redirect()->intended('/admin');
+            }
+            return redirect()->intended('/home');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
+    }
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            // Authentication passed, redirect to user page
-            return redirect()->intended('/user');
+            // Kiểm tra nếu email là admin@example.com
+            if (Auth::user()->email == 'admin@example.com') {
+                return redirect()->intended('/admin');
+            }
+            return redirect()->intended('/home');
         }
 
-        // If authentication fails, redirect back with error message
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);

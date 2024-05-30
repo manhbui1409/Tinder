@@ -72,5 +72,14 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
     ],
+    'disks' => [
+        'admin' => [
+            'driver' => 'local',
+            'root' => storage_path('app/admin'), // hoặc đường dẫn gốc bạn mong muốn
+        ],
+        // Cấu hình ổ đĩa khác...
+    ],
+
+
 
 ];

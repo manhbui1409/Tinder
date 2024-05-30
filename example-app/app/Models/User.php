@@ -23,4 +23,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+        protected static function boot()
+    {
+        parent::boot();
+
+        static::saved(function ($user) {
+            event(new UserUpdated($user));
+    });
+    }
+
 }
